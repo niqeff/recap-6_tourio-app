@@ -10,15 +10,20 @@ const StyledBackLink = styled(StyledLink)`
 
 export default function CreatePlacePage() {
   const router = useRouter();
-  async function addPlace(place) {
-    console.log("adding place");
+
+  async function handleAddPlace(place) {
+    const response = fetch("/api/places/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(place),
+    });
   }
 
   return (
     <>
       <h2 id="add-place">Add Place</h2>
       <StyledBackLink href="/">back</StyledBackLink>
-      <Form onSubmit={addPlace} formName={"add-place"} />
+      <Form onSubmit={handleAddPlace} formName={"add-place"} />
     </>
   );
 }
