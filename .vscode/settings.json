@@ -1,0 +1,13 @@
+{
+  "folder-customization.folders": [
+    {
+      "path": "recap-6_tourio-app/pages/",
+      "color": "foldercustomization.AnsiColor53"
+    },
+    {
+      "path": "recap-6_tourio-app/pages/api/",
+      "badge": "💀",
+      "color": "foldercustomization.AnsiColor72"
+    }
+  ]
+}
