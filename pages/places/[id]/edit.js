@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import Form from "../../../components/Form";
 import { StyledLink } from "../../../components/StyledLink";
+import { mutate } from "swr";
 
 export default function EditPage() {
   const router = useRouter();
@@ -10,13 +11,13 @@ export default function EditPage() {
   const { data: place, isLoading, error } = useSWR(`/api/places/${id}`);
 
   async function editPlace(place) {
-    console.log("Editing place ...");
     const response = await fetch(`/api/places/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(place),
     });
     if (response.ok) {
+      await response.json();
       router.push(`/places/${id}`);
     }
   }
@@ -29,7 +30,12 @@ export default function EditPage() {
       <StyledLink href={`/places/${id}`} $justifySelf="start">
         back
       </StyledLink>
-      <Form onSubmit={editPlace} formName={"edit-place"} defaultData={place} />
+      <Form
+        onSubmit={editPlace}
+        formName={"edit-place"}
+        defaultData={place}
+        router={router}
+      />
     </>
   );
 }
