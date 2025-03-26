@@ -23,6 +23,14 @@ export default async function handler(request, response) {
         response.status(500).json({ status: error.message });
       }
       break;
+    case "DELETE":
+      try {
+        await Places.findByIdAndDelete(id);
+        response.status(200).json({ status: "Succesfully deleted" });
+      } catch (error) {
+        response.status(404).json({ status: error.message });
+      }
+      break;      
     default:
       response.status(404).json({ status: error.message });
       break;
